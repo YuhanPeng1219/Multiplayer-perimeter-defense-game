@@ -94,6 +94,10 @@ while iter <= tauLength
       lower = tEarliest(i);
 
       tEarliest(i) = find_earliest_BRS_ind(g, data, xs{i}, upper, lower);
+      
+%       if i==2 && iter==1
+%          tEarliest(i) = 20; 
+%       end
 
       % BRS at current time
       BRS_at_t = data(clns{:}, tEarliest(i));
@@ -113,6 +117,12 @@ while iter <= tauLength
 
       xs{i}(1:2) = xs{i}(1:2) + dira*gameParam.va*dt;
       xs{i}(3:4) = xs{i}(3:4) + dird*gameParam.vd*dt;
+      
+      x_temp = xs{i};
+      x_temp(1:2) = x_temp(1:2)/norm(x_temp(1:2));
+      x_temp(3:4) = x_temp(3:4)/norm(x_temp(3:4));
+      tan_difference = atan2(x_temp(2),x_temp(1)) - atan2(x_temp(4),x_temp(3));
+      fprintf("tan diff of pair(%d) is %d \n", i, tan_difference);
 
 %       xs{i} = [xa;xd];
 

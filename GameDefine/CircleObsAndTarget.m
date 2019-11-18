@@ -65,6 +65,12 @@ if gameParam.type == "chase"
 elseif gameParam.type == "protect"
     defenderWin = atan2(g.xs{2},g.xs{1}) - atan2(g.xs{4},g.xs{3});
     defenderWin = (abs(defenderWin)) - 0.08;
+elseif gameParam.type == "both"
+    defenderWin1 = (g.xs{1} - g.xs{3}) .^2 + (g.xs{2} - g.xs{4}) .^2;
+    defenderWin1 = sqrt(defenderWin1) - captureRadius;
+    defenderWin2 = atan2(g.xs{2},g.xs{1}).^2 - atan2(g.xs{4},g.xs{3}).^2;
+    defenderWin2 = sqrt(abs(defenderWin2)) - 0.08;
+    defenderWin = min(defenderWin1, defenderWin2);
 end
 
 % Mask the defender Win region from attacker Win region
@@ -111,7 +117,7 @@ function obs = ObsFunction(g, o, t, type)
             obs1 = shapeCylinder(g, [1 2], [0,0,o.center], o.radius);
             % target set obs
 %             obs2 = sqrt((xd-t.center(i,1)).^2 + (yd-t.center(i,2)).^2) - t.radius(i);
-            obs2 = shapeCylinder(g, [1 2], [0,0,t.center], t.radius-0.05);
+            obs2 = shapeCylinder(g, [1 2], [0,0,t.center], t.radius-0.06);
             
 %             obs = obs1;
             obs = min(obs1, obs2);

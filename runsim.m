@@ -6,9 +6,9 @@ addpath(genpath('ToolboxLS'));
 
 %% ------------------- Initial game setting -----------------------
 % defender and attacker initial position
-gameParam.xa_init{1} = [-0.3 0.2];
+gameParam.xa_init{1} = [-0.4 0.2];
 gameParam.xd_init{1} = [0.11 0.];
-gameParam.xa_init{2} = [0.05 -0.2];
+gameParam.xa_init{2} = [-0.4 -0.45];
 gameParam.xd_init{2} = [0.11 0];
 
 % define player velocity
@@ -22,14 +22,15 @@ gameParam.captureRadius = 0.05;
 gameParam.timeMax = 1;
 
 % define resolution
-gameParam.Nx = 41;
+gameParam.Nx = 51;
 
 % - Define game type
 % - 'protect'  the defender just try to keep attacker away from the target
 % - 'chase'    the defender tries to catch the attacker
 
-gameParam.type = 'protect';
+% gameParam.type = 'protect';
 % gameParam.type = 'chase';
+gameParam.type = 'both';
 
 %% ------------------------- run game -----------------------------
 % [data] = computeReachableSet(gameParm, 'medium', 'circleTarget_noObs');
